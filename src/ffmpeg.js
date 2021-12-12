@@ -38,18 +38,18 @@ Scoped.require([
 			file.stderr.on("data", function(data) {
 				var line = data.toString();
 				lines += line;
-				eventCallback.call(eventContext || this, line);
+				// eventCallback.call(eventContext || this, line);
 				// if (line.indexOf("frame=") === 0) {
-				// 	var progress = line.trim();
-				// 	var result = {};
-				// 	while (true) {
-				// 		var m = progress_regex.exec(progress);
-				// 		if (!m)
-				// 			break;
-				// 		result[m[1]] = m[2];
-				// 	}
-				// 	if (eventCallback)
-				// 		eventCallback.call(eventContext || this, result);
+					var progress = line.trim();
+					var result = {};
+					while (true) {
+						var m = progress_regex.exec(progress);
+						if (!m)
+							break;
+						result[m[1]] = m[2];
+					}
+					if (eventCallback)
+						eventCallback.call(eventContext || this, result);
 				// }
 			});
 			file.stderr.on("end", function(data) {
